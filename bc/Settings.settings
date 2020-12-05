@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SettingsFile CurrentProfile="(Default)" GeneratedClassNamespace="bc" GeneratedClassName="Settings" xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings">
+  <Profiles>
+    <Profile Name="(Default)" />
+  </Profiles>
+  <Settings>
+    <Setting Name="mode" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="times" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">06:00 - Morning,10:30 - Day,18:00 - Evening,20:00 - Night</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
