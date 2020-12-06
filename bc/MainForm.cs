@@ -22,6 +22,7 @@ namespace bc
 	public partial class MainForm : Form
 	{
 		#region Imported Functions
+		
 			//Source: https://www.codeproject.com/articles/191424/resizing-an-image-on-the-fly-using-net#codeSampleTab-5
 			public static Image ResizeImage(Image image, Size size, bool preserveAspectRatio = true)
 			{
@@ -50,6 +51,7 @@ namespace bc
 			    }
 			    return newImage;
 			}
+		
 		#endregion
 		
 		#region GUI Controls
@@ -287,13 +289,16 @@ namespace bc
 			sw.WriteLine(exp);
 			sw.Close();
 		}
+		
 		#endregion
 		
 		#region Time Period Tab
+			
 			void Time_ctxOpening(object sender, System.ComponentModel.CancelEventArgs e)
 			{
 				editToolStripMenuItem.Visible = times.SelectedItems.Count!=0; 
 			}
+			
 			void TimesSelectedIndexChanged(object sender, EventArgs e)
 			{
 				if (times.SelectedItems.Count==0 || this.Enabled==false) return;
@@ -310,6 +315,7 @@ namespace bc
 				time_colour.BackColor = Color.FromArgb(int.Parse(c[0]),int.Parse(c[1]),int.Parse(c[2]));
 				time_colour.AccessibleDescription = n[2];
 			}
+			
 			void Time_saveClick(object sender, EventArgs e)
 			{
 				this.Enabled = false;
@@ -321,6 +327,7 @@ namespace bc
 				save();
 				this.Enabled = true;
 			}
+			
 			void Time_colourClick(object sender, EventArgs e)
 			{
 				colourPick.Color = time_colour.BackColor;
@@ -330,6 +337,7 @@ namespace bc
 					time_colour.AccessibleDescription = c.R + ":" + c.G + ":" + c.B;
 				}
 			}
+			
 			void Time_addClick(object sender, EventArgs e)
 			{
 				times.Items.Add("");
@@ -342,25 +350,31 @@ namespace bc
 				time_colour.BackColor=Color.FromArgb(39, 39, 39);
 				time_hr.Focus();
 			}
+		
 		#endregion
 		
 		#region Settings Tab
+			
 			void Setup_windirClick(object sender, EventArgs e)
 			{
 				setup_windir.ImageIndex = (setup_windir.ImageIndex==0 ? 1 : 0);
 			}
+			
 			void Setup_schClick(object sender, EventArgs e)
 			{
 				setup_sch.ImageIndex = (setup_sch.ImageIndex==0 ? 1 : 0);
 			}
+			
 			void Setup_procClick(object sender, EventArgs e)
 		{
 			setup_proc.ImageIndex = (setup_proc.ImageIndex==0 ? 1 : 0);
 		}
+			
 			void Setup_uninstClick(object sender, EventArgs e)
 			{
 				
 			}
+			
 			void ImageDirSelectClick(object sender, EventArgs e)
 			{
 				if (folderPick.ShowDialog() == DialogResult.OK){
@@ -368,6 +382,7 @@ namespace bc
 					save();
 				}			
 			}
+		
 		#endregion
 		
 		#region Tools Tab
