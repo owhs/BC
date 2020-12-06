@@ -23,21 +23,27 @@ namespace bc {
 			}
 		}
 		
-		[global::System.Configuration.ApplicationScopedSettingAttribute()]
+		[global::System.Configuration.UserScopedSettingAttribute()]
 		[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
 		[global::System.Configuration.DefaultSettingValueAttribute("0")]
 		public int mode {
 			get {
 				return ((int)(this["mode"]));
 			}
+			set {
+				this["mode"] = value;
+			}
 		}
 		
-		[global::System.Configuration.ApplicationScopedSettingAttribute()]
+		[global::System.Configuration.UserScopedSettingAttribute()]
 		[global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-		[global::System.Configuration.DefaultSettingValueAttribute("06:00 - Morning,10:30 - Day,18:00 - Evening,20:00 - Night")]
+		[global::System.Configuration.DefaultSettingValueAttribute("06:00-Morning,10:30-Day,18:00-Evening,20:00-Night")]
 		public string times {
 			get {
 				return ((string)(this["times"]));
+			}
+			set {
+				this["times"] = value;
 			}
 		}
 	}

@@ -172,7 +172,7 @@ namespace bc
 						options.Add(o[0],o[1]);
 					}
 				} catch {}
-				LoopThroughControls(this);
+				if (options.Count>0) LoopThroughControls(this);
 			}
 			#endregion
 		
@@ -196,34 +196,81 @@ namespace bc
 			this.Opacity = 1;
 			status.Text="";
 			
+			// 
 			foreach (string t in Settings.Default.times.Split(',')) {
 				times.Items.Add(t);
 			}
-			//MessageBox.Show(tabPage1.Controls[2].Name);
+			
 			RadioButton mo = (RadioButton)(tabPage1.Controls[2-Settings.Default.mode]);
 			mo.Checked=true;
 			
-		}
-		
-		void ModeMouseMove(object sender, MouseEventArgs e)
-		{
-			RadioButton b = (RadioButton)sender;
-			status.Text = b.AccessibleDescription;
-		}
-		
-		void ModeMouseLeave(object sender, EventArgs e)
-		{
-			status.Text = "";
-		}
-		
-		void ListBox1DoubleClick(object sender, EventArgs e)
-		{
+			if (options.ContainsKey("mainColour")){
+				string[] cl = options["mainColour"].Split(',');
+				Color mainCol = Color.FromArgb(int.Parse(cl[0]),int.Parse(cl[1]),int.Parse(cl[2]));
+				Color mainColB = Color.FromArgb(int.Parse(cl[0])+3,int.Parse(cl[1])+3,int.Parse(cl[2])+3);
+				Color mainColD = Color.FromArgb(int.Parse(cl[0])-3,int.Parse(cl[1])-3,int.Parse(cl[2])-3);
+				Color mainColDD = Color.FromArgb(int.Parse(cl[0])-6,int.Parse(cl[1])-6,int.Parse(cl[2])-6);
+				
+				
+				tabs.SelectTabColor = mainCol;
+				
+				foreach (RadioButton t in tabPage1.Controls) {
+					t.FlatAppearance.CheckedBackColor = mainCol;
+					t.FlatAppearance.MouseOverBackColor = mainColB;
+					t.FlatAppearance.MouseDownBackColor = mainColD;
+				}
+			}
+			Status_timerTick(new Object(),new EventArgs());
 			
 		}
 		
-		void Time_ctxOpening(object sender, System.ComponentModel.CancelEventArgs e)
+		#region Status
+		string currentStatus = "Not Running";
+		void StatusUpdateMove(object sender, MouseEventArgs e)
 		{
-			editToolStripMenuItem.Visible = times.SelectedItems.Count!=0; 
+			Control b = (Control)sender;
+			status.ForeColor = Color.FromArgb(170,170,170);
+			status.Text = b.AccessibleDescription;
+		}
+		void StatusUpdateLeave(object sender, EventArgs e)
+		{
+			status.Text = "";
+			Status_timerTick(sender,e);
+		}
+		void Status_timerTick(object sender, EventArgs e)
+		{
+			if (status.Text == ""){
+				if (currentStatus.ToLower()=="not running"){
+					status.ForeColor = Color.FromArgb(170,30,30);
+				} else if (currentStatus.ToLower()=="running"){
+					status.ForeColor = Color.FromArgb(30,170,30);
+				}
+				status.Text = "Status: " + currentStatus;
+			}
+		}
+		#endregion
+				
+		#region Time Period Tab
+			void Time_ctxOpening(object sender, System.ComponentModel.CancelEventArgs e)
+			{
+				editToolStripMenuItem.Visible = times.SelectedItems.Count!=0; 
+			}
+			void TimesSelectedIndexChanged(object sender, EventArgs e)
+			{
+				string[] n = times.SelectedItem.ToString().Split('-');
+				string[] t = n[0].Split(':');
+				
+				time_hr.Text = t[0];
+				time_min.Text = t[1];
+				time_name.Text = n[1];
+				
+			}
+		#endregion
+		
+		
+		void Setup_windirClick(object sender, EventArgs e)
+		{
+			setup_windir.ImageIndex = (setup_windir.ImageIndex==0 ? 1 : 0);
 		}
 	}
 }

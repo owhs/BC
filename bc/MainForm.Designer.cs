@@ -45,6 +45,7 @@ namespace bc
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
 			this.titlebar = new System.Windows.Forms.Panel();
 			this.titlebar_icon = new System.Windows.Forms.Label();
 			this.titlebar_ctx = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -65,10 +66,27 @@ namespace bc
 			this.time_ctx = new System.Windows.Forms.ContextMenuStrip(this.components);
 			this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.addToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.panel1 = new System.Windows.Forms.Panel();
+			this.time_save = new System.Windows.Forms.Button();
+			this.time_name = new System.Windows.Forms.TextBox();
+			this.label4 = new System.Windows.Forms.Label();
+			this.label3 = new System.Windows.Forms.Label();
+			this.label2 = new System.Windows.Forms.Label();
+			this.time_min = new System.Windows.Forms.TextBox();
+			this.time_hr = new System.Windows.Forms.TextBox();
+			this.label1 = new System.Windows.Forms.Label();
 			this.tabPage3 = new System.Windows.Forms.TabPage();
 			this.tabPage4 = new System.Windows.Forms.TabPage();
+			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.setup_windir = new System.Windows.Forms.Button();
+			this.chks = new System.Windows.Forms.ImageList(this.components);
+			this.setup_proc = new System.Windows.Forms.Button();
+			this.setup_uninst = new System.Windows.Forms.Button();
+			this.setup_sch = new System.Windows.Forms.Button();
 			this.footer = new System.Windows.Forms.Panel();
 			this.status = new System.Windows.Forms.Label();
+			this.status_timer = new System.Windows.Forms.Timer(this.components);
 			this.titlebar.SuspendLayout();
 			this.titlebar_ctx.SuspendLayout();
 			this.border.SuspendLayout();
@@ -77,6 +95,9 @@ namespace bc
 			this.tabPage1.SuspendLayout();
 			this.tabPage2.SuspendLayout();
 			this.time_ctx.SuspendLayout();
+			this.panel1.SuspendLayout();
+			this.tabPage4.SuspendLayout();
+			this.groupBox1.SuspendLayout();
 			this.footer.SuspendLayout();
 			this.SuspendLayout();
 			// 
@@ -280,8 +301,8 @@ namespace bc
 			this.mode_v2.Text = "Smart v2";
 			this.mode_v2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.mode_v2.UseVisualStyleBackColor = false;
-			this.mode_v2.MouseLeave += new System.EventHandler(this.ModeMouseLeave);
-			this.mode_v2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ModeMouseMove);
+			this.mode_v2.MouseLeave += new System.EventHandler(this.StatusUpdateLeave);
+			this.mode_v2.MouseMove += new System.Windows.Forms.MouseEventHandler(this.StatusUpdateMove);
 			// 
 			// mode_v1
 			// 
@@ -302,8 +323,8 @@ namespace bc
 			this.mode_v1.Text = "Smart v1";
 			this.mode_v1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.mode_v1.UseVisualStyleBackColor = false;
-			this.mode_v1.MouseLeave += new System.EventHandler(this.ModeMouseLeave);
-			this.mode_v1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ModeMouseMove);
+			this.mode_v1.MouseLeave += new System.EventHandler(this.StatusUpdateLeave);
+			this.mode_v1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.StatusUpdateMove);
 			// 
 			// mode_default
 			// 
@@ -326,13 +347,14 @@ namespace bc
 			this.mode_default.Text = "Default (Folders)";
 			this.mode_default.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
 			this.mode_default.UseVisualStyleBackColor = false;
-			this.mode_default.MouseLeave += new System.EventHandler(this.ModeMouseLeave);
-			this.mode_default.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ModeMouseMove);
+			this.mode_default.MouseLeave += new System.EventHandler(this.StatusUpdateLeave);
+			this.mode_default.MouseMove += new System.Windows.Forms.MouseEventHandler(this.StatusUpdateMove);
 			// 
 			// tabPage2
 			// 
 			this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
 			this.tabPage2.Controls.Add(this.times);
+			this.tabPage2.Controls.Add(this.panel1);
 			this.tabPage2.Location = new System.Drawing.Point(4, 32);
 			this.tabPage2.Margin = new System.Windows.Forms.Padding(0);
 			this.tabPage2.Name = "tabPage2";
@@ -351,8 +373,9 @@ namespace bc
 			this.times.ItemHeight = 20;
 			this.times.Location = new System.Drawing.Point(0, 0);
 			this.times.Name = "times";
-			this.times.Size = new System.Drawing.Size(526, 274);
-			this.times.TabIndex = 11;
+			this.times.Size = new System.Drawing.Size(353, 274);
+			this.times.TabIndex = 13;
+			this.times.SelectedIndexChanged += new System.EventHandler(this.TimesSelectedIndexChanged);
 			// 
 			// time_ctx
 			// 
@@ -375,6 +398,120 @@ namespace bc
 			this.addToolStripMenuItem.Size = new System.Drawing.Size(106, 24);
 			this.addToolStripMenuItem.Text = "&Add";
 			// 
+			// panel1
+			// 
+			this.panel1.Controls.Add(this.time_save);
+			this.panel1.Controls.Add(this.time_name);
+			this.panel1.Controls.Add(this.label4);
+			this.panel1.Controls.Add(this.label3);
+			this.panel1.Controls.Add(this.label2);
+			this.panel1.Controls.Add(this.time_min);
+			this.panel1.Controls.Add(this.time_hr);
+			this.panel1.Controls.Add(this.label1);
+			this.panel1.Dock = System.Windows.Forms.DockStyle.Right;
+			this.panel1.Enabled = false;
+			this.panel1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+			this.panel1.Location = new System.Drawing.Point(353, 0);
+			this.panel1.Name = "panel1";
+			this.panel1.Size = new System.Drawing.Size(173, 274);
+			this.panel1.TabIndex = 0;
+			// 
+			// time_save
+			// 
+			this.time_save.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+			this.time_save.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+			this.time_save.FlatAppearance.BorderSize = 0;
+			this.time_save.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.time_save.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+			this.time_save.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+			this.time_save.Location = new System.Drawing.Point(17, 163);
+			this.time_save.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.time_save.Name = "time_save";
+			this.time_save.Size = new System.Drawing.Size(134, 26);
+			this.time_save.TabIndex = 9;
+			this.time_save.Tag = "";
+			this.time_save.Text = "Save";
+			this.time_save.UseVisualStyleBackColor = false;
+			// 
+			// time_name
+			// 
+			this.time_name.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+			this.time_name.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.time_name.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+			this.time_name.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(155)))), ((int)(((byte)(155)))));
+			this.time_name.Location = new System.Drawing.Point(17, 121);
+			this.time_name.Multiline = true;
+			this.time_name.Name = "time_name";
+			this.time_name.Size = new System.Drawing.Size(134, 22);
+			this.time_name.TabIndex = 6;
+			this.time_name.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// label4
+			// 
+			this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+			this.label4.Location = new System.Drawing.Point(0, 84);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(169, 34);
+			this.label4.TabIndex = 5;
+			this.label4.Text = "Name:";
+			this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// label3
+			// 
+			this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+			this.label3.Location = new System.Drawing.Point(92, 30);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(80, 22);
+			this.label3.TabIndex = 4;
+			this.label3.Text = "Min";
+			this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// label2
+			// 
+			this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+			this.label2.Location = new System.Drawing.Point(6, 30);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(80, 22);
+			this.label2.TabIndex = 3;
+			this.label2.Text = "Hour";
+			this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
+			// time_min
+			// 
+			this.time_min.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+			this.time_min.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.time_min.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+			this.time_min.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(155)))), ((int)(((byte)(155)))));
+			this.time_min.Location = new System.Drawing.Point(108, 59);
+			this.time_min.Multiline = true;
+			this.time_min.Name = "time_min";
+			this.time_min.Size = new System.Drawing.Size(48, 22);
+			this.time_min.TabIndex = 2;
+			this.time_min.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// time_hr
+			// 
+			this.time_hr.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+			this.time_hr.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.time_hr.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+			this.time_hr.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(155)))), ((int)(((byte)(155)))));
+			this.time_hr.Location = new System.Drawing.Point(22, 59);
+			this.time_hr.Multiline = true;
+			this.time_hr.Name = "time_hr";
+			this.time_hr.Size = new System.Drawing.Size(48, 20);
+			this.time_hr.TabIndex = 1;
+			this.time_hr.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+			// 
+			// label1
+			// 
+			this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+			this.label1.Location = new System.Drawing.Point(0, 0);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(169, 34);
+			this.label1.TabIndex = 0;
+			this.label1.Text = "Time:";
+			this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+			// 
 			// tabPage3
 			// 
 			this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
@@ -387,11 +524,130 @@ namespace bc
 			// tabPage4
 			// 
 			this.tabPage4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
+			this.tabPage4.Controls.Add(this.groupBox2);
+			this.tabPage4.Controls.Add(this.groupBox1);
 			this.tabPage4.Location = new System.Drawing.Point(4, 32);
 			this.tabPage4.Name = "tabPage4";
 			this.tabPage4.Size = new System.Drawing.Size(526, 274);
 			this.tabPage4.TabIndex = 3;
 			this.tabPage4.Text = "Settings";
+			// 
+			// groupBox2
+			// 
+			this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
+			this.groupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+			this.groupBox2.Location = new System.Drawing.Point(308, 16);
+			this.groupBox2.Name = "groupBox2";
+			this.groupBox2.Size = new System.Drawing.Size(204, 242);
+			this.groupBox2.TabIndex = 13;
+			this.groupBox2.TabStop = false;
+			this.groupBox2.Text = "Tools";
+			// 
+			// groupBox1
+			// 
+			this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
+			this.groupBox1.Controls.Add(this.setup_windir);
+			this.groupBox1.Controls.Add(this.setup_proc);
+			this.groupBox1.Controls.Add(this.setup_uninst);
+			this.groupBox1.Controls.Add(this.setup_sch);
+			this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+			this.groupBox1.Location = new System.Drawing.Point(16, 16);
+			this.groupBox1.Name = "groupBox1";
+			this.groupBox1.Size = new System.Drawing.Size(274, 242);
+			this.groupBox1.TabIndex = 11;
+			this.groupBox1.TabStop = false;
+			this.groupBox1.Text = "Setup";
+			// 
+			// setup_windir
+			// 
+			this.setup_windir.AccessibleDescription = "Copies runtimes to windir - so install doesn\'t break";
+			this.setup_windir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+			this.setup_windir.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+			this.setup_windir.FlatAppearance.BorderSize = 0;
+			this.setup_windir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.setup_windir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+			this.setup_windir.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+			this.setup_windir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.setup_windir.ImageIndex = 0;
+			this.setup_windir.ImageList = this.chks;
+			this.setup_windir.Location = new System.Drawing.Point(12, 143);
+			this.setup_windir.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.setup_windir.Name = "setup_windir";
+			this.setup_windir.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
+			this.setup_windir.Size = new System.Drawing.Size(248, 26);
+			this.setup_windir.TabIndex = 13;
+			this.setup_windir.Tag = "";
+			this.setup_windir.Text = "Install to windows dir";
+			this.setup_windir.UseVisualStyleBackColor = false;
+			this.setup_windir.Click += new System.EventHandler(this.Setup_windirClick);
+			this.setup_windir.MouseLeave += new System.EventHandler(this.StatusUpdateLeave);
+			this.setup_windir.MouseMove += new System.Windows.Forms.MouseEventHandler(this.StatusUpdateMove);
+			// 
+			// chks
+			// 
+			this.chks.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("chks.ImageStream")));
+			this.chks.TransparentColor = System.Drawing.Color.Transparent;
+			this.chks.Images.SetKeyName(0, "blank.png");
+			this.chks.Images.SetKeyName(1, "checked.png");
+			// 
+			// setup_proc
+			// 
+			this.setup_proc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+			this.setup_proc.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+			this.setup_proc.FlatAppearance.BorderSize = 0;
+			this.setup_proc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.setup_proc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+			this.setup_proc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+			this.setup_proc.Location = new System.Drawing.Point(12, 87);
+			this.setup_proc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.setup_proc.Name = "setup_proc";
+			this.setup_proc.Size = new System.Drawing.Size(248, 26);
+			this.setup_proc.TabIndex = 12;
+			this.setup_proc.Tag = "";
+			this.setup_proc.Text = "Install via bg process";
+			this.setup_proc.UseVisualStyleBackColor = false;
+			this.setup_proc.MouseLeave += new System.EventHandler(this.StatusUpdateLeave);
+			this.setup_proc.MouseMove += new System.Windows.Forms.MouseEventHandler(this.StatusUpdateMove);
+			// 
+			// setup_uninst
+			// 
+			this.setup_uninst.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+			this.setup_uninst.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+			this.setup_uninst.FlatAppearance.BorderSize = 0;
+			this.setup_uninst.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.setup_uninst.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+			this.setup_uninst.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+			this.setup_uninst.Location = new System.Drawing.Point(12, 199);
+			this.setup_uninst.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.setup_uninst.Name = "setup_uninst";
+			this.setup_uninst.Size = new System.Drawing.Size(248, 26);
+			this.setup_uninst.TabIndex = 11;
+			this.setup_uninst.Tag = "";
+			this.setup_uninst.Text = "Uninstall";
+			this.setup_uninst.UseVisualStyleBackColor = false;
+			this.setup_uninst.MouseLeave += new System.EventHandler(this.StatusUpdateLeave);
+			this.setup_uninst.MouseMove += new System.Windows.Forms.MouseEventHandler(this.StatusUpdateMove);
+			// 
+			// setup_sch
+			// 
+			this.setup_sch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+			this.setup_sch.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+			this.setup_sch.FlatAppearance.BorderSize = 0;
+			this.setup_sch.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.setup_sch.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+			this.setup_sch.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+			this.setup_sch.Location = new System.Drawing.Point(12, 31);
+			this.setup_sch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.setup_sch.Name = "setup_sch";
+			this.setup_sch.Size = new System.Drawing.Size(248, 26);
+			this.setup_sch.TabIndex = 10;
+			this.setup_sch.Tag = "";
+			this.setup_sch.Text = "Install via Schedule";
+			this.setup_sch.UseVisualStyleBackColor = false;
+			this.setup_sch.MouseLeave += new System.EventHandler(this.StatusUpdateLeave);
+			this.setup_sch.MouseMove += new System.Windows.Forms.MouseEventHandler(this.StatusUpdateMove);
 			// 
 			// footer
 			// 
@@ -416,6 +672,12 @@ namespace bc
 			this.status.TabIndex = 8;
 			this.status.Text = "status";
 			this.status.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// status_timer
+			// 
+			this.status_timer.Enabled = true;
+			this.status_timer.Interval = 5000;
+			this.status_timer.Tick += new System.EventHandler(this.Status_timerTick);
 			// 
 			// MainForm
 			// 
@@ -443,9 +705,30 @@ namespace bc
 			this.tabPage1.ResumeLayout(false);
 			this.tabPage2.ResumeLayout(false);
 			this.time_ctx.ResumeLayout(false);
+			this.panel1.ResumeLayout(false);
+			this.panel1.PerformLayout();
+			this.tabPage4.ResumeLayout(false);
+			this.groupBox1.ResumeLayout(false);
 			this.footer.ResumeLayout(false);
 			this.ResumeLayout(false);
 		}
+		private System.Windows.Forms.Button setup_windir;
+		private System.Windows.Forms.ImageList chks;
+		private System.Windows.Forms.GroupBox groupBox2;
+		private System.Windows.Forms.Button setup_proc;
+		private System.Windows.Forms.Button setup_uninst;
+		private System.Windows.Forms.Button setup_sch;
+		private System.Windows.Forms.GroupBox groupBox1;
+		private System.Windows.Forms.Timer status_timer;
+		private System.Windows.Forms.Button time_save;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.TextBox time_name;
+		private System.Windows.Forms.TextBox time_hr;
+		private System.Windows.Forms.TextBox time_min;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Panel panel1;
 		private System.Windows.Forms.ToolStripMenuItem addToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
 		private System.Windows.Forms.ContextMenuStrip time_ctx;
@@ -462,5 +745,10 @@ namespace bc
 		private System.Windows.Forms.TabPage tabPage2;
 		private System.Windows.Forms.TabPage tabPage1;
 		private bc.CustomTabControl tabs;
+		
+		void StatusUpdateMoveStatusUpdateLeave(object sender, System.Windows.Forms.MouseEventArgs e)
+		{
+			
+		}
 	}
 }
