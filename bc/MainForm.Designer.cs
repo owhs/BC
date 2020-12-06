@@ -76,13 +76,16 @@ namespace bc
 			this.time_hr = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.tabPage3 = new System.Windows.Forms.TabPage();
+			this.listBox1 = new System.Windows.Forms.ListBox();
+			this.panel2 = new System.Windows.Forms.Panel();
 			this.tabPage4 = new System.Windows.Forms.TabPage();
 			this.groupBox2 = new System.Windows.Forms.GroupBox();
+			this.button1 = new System.Windows.Forms.Button();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.setup_windir = new System.Windows.Forms.Button();
 			this.chks = new System.Windows.Forms.ImageList(this.components);
-			this.setup_proc = new System.Windows.Forms.Button();
 			this.setup_uninst = new System.Windows.Forms.Button();
+			this.setup_proc = new System.Windows.Forms.Button();
 			this.setup_sch = new System.Windows.Forms.Button();
 			this.footer = new System.Windows.Forms.Panel();
 			this.status = new System.Windows.Forms.Label();
@@ -96,7 +99,9 @@ namespace bc
 			this.tabPage2.SuspendLayout();
 			this.time_ctx.SuspendLayout();
 			this.panel1.SuspendLayout();
+			this.tabPage3.SuspendLayout();
 			this.tabPage4.SuspendLayout();
+			this.groupBox2.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.footer.SuspendLayout();
 			this.SuspendLayout();
@@ -515,11 +520,35 @@ namespace bc
 			// tabPage3
 			// 
 			this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
+			this.tabPage3.Controls.Add(this.listBox1);
+			this.tabPage3.Controls.Add(this.panel2);
 			this.tabPage3.Location = new System.Drawing.Point(4, 32);
 			this.tabPage3.Name = "tabPage3";
 			this.tabPage3.Size = new System.Drawing.Size(526, 274);
 			this.tabPage3.TabIndex = 2;
 			this.tabPage3.Text = "Images";
+			// 
+			// listBox1
+			// 
+			this.listBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(30)))));
+			this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
+			this.listBox1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.listBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+			this.listBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+			this.listBox1.ItemHeight = 20;
+			this.listBox1.Location = new System.Drawing.Point(0, 0);
+			this.listBox1.Name = "listBox1";
+			this.listBox1.Size = new System.Drawing.Size(166, 274);
+			this.listBox1.TabIndex = 14;
+			// 
+			// panel2
+			// 
+			this.panel2.Dock = System.Windows.Forms.DockStyle.Right;
+			this.panel2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(100)))), ((int)(((byte)(100)))));
+			this.panel2.Location = new System.Drawing.Point(166, 0);
+			this.panel2.Name = "panel2";
+			this.panel2.Size = new System.Drawing.Size(360, 274);
+			this.panel2.TabIndex = 1;
 			// 
 			// tabPage4
 			// 
@@ -535,6 +564,7 @@ namespace bc
 			// groupBox2
 			// 
 			this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
+			this.groupBox2.Controls.Add(this.button1);
 			this.groupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
 			this.groupBox2.Location = new System.Drawing.Point(308, 16);
@@ -544,12 +574,32 @@ namespace bc
 			this.groupBox2.TabStop = false;
 			this.groupBox2.Text = "Tools";
 			// 
+			// button1
+			// 
+			this.button1.AccessibleDescription = "Check folders have valid pictures";
+			this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+			this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+			this.button1.FlatAppearance.BorderSize = 0;
+			this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+			this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+			this.button1.Location = new System.Drawing.Point(11, 31);
+			this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.button1.Name = "button1";
+			this.button1.Size = new System.Drawing.Size(179, 35);
+			this.button1.TabIndex = 11;
+			this.button1.Tag = "";
+			this.button1.Text = "Check Folders";
+			this.button1.UseVisualStyleBackColor = false;
+			this.button1.MouseLeave += new System.EventHandler(this.StatusUpdateLeave);
+			this.button1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.StatusUpdateMove);
+			// 
 			// groupBox1
 			// 
 			this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
 			this.groupBox1.Controls.Add(this.setup_windir);
-			this.groupBox1.Controls.Add(this.setup_proc);
 			this.groupBox1.Controls.Add(this.setup_uninst);
+			this.groupBox1.Controls.Add(this.setup_proc);
 			this.groupBox1.Controls.Add(this.setup_sch);
 			this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
@@ -572,11 +622,11 @@ namespace bc
 			this.setup_windir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.setup_windir.ImageIndex = 0;
 			this.setup_windir.ImageList = this.chks;
-			this.setup_windir.Location = new System.Drawing.Point(12, 143);
+			this.setup_windir.Location = new System.Drawing.Point(12, 145);
 			this.setup_windir.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.setup_windir.Name = "setup_windir";
 			this.setup_windir.Padding = new System.Windows.Forms.Padding(0, 0, 5, 0);
-			this.setup_windir.Size = new System.Drawing.Size(248, 26);
+			this.setup_windir.Size = new System.Drawing.Size(248, 31);
 			this.setup_windir.TabIndex = 13;
 			this.setup_windir.Tag = "";
 			this.setup_windir.Text = "Install to windows dir";
@@ -592,37 +642,19 @@ namespace bc
 			this.chks.Images.SetKeyName(0, "blank.png");
 			this.chks.Images.SetKeyName(1, "checked.png");
 			// 
-			// setup_proc
-			// 
-			this.setup_proc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
-			this.setup_proc.FlatAppearance.BorderColor = System.Drawing.Color.Black;
-			this.setup_proc.FlatAppearance.BorderSize = 0;
-			this.setup_proc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.setup_proc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
-			this.setup_proc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-			this.setup_proc.Location = new System.Drawing.Point(12, 87);
-			this.setup_proc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.setup_proc.Name = "setup_proc";
-			this.setup_proc.Size = new System.Drawing.Size(248, 26);
-			this.setup_proc.TabIndex = 12;
-			this.setup_proc.Tag = "";
-			this.setup_proc.Text = "Install via bg process";
-			this.setup_proc.UseVisualStyleBackColor = false;
-			this.setup_proc.MouseLeave += new System.EventHandler(this.StatusUpdateLeave);
-			this.setup_proc.MouseMove += new System.Windows.Forms.MouseEventHandler(this.StatusUpdateMove);
-			// 
 			// setup_uninst
 			// 
+			this.setup_uninst.AccessibleDescription = "Uninstall schedule / startup instances";
 			this.setup_uninst.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
 			this.setup_uninst.FlatAppearance.BorderColor = System.Drawing.Color.Black;
 			this.setup_uninst.FlatAppearance.BorderSize = 0;
 			this.setup_uninst.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.setup_uninst.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
 			this.setup_uninst.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-			this.setup_uninst.Location = new System.Drawing.Point(12, 199);
+			this.setup_uninst.Location = new System.Drawing.Point(12, 200);
 			this.setup_uninst.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.setup_uninst.Name = "setup_uninst";
-			this.setup_uninst.Size = new System.Drawing.Size(248, 26);
+			this.setup_uninst.Size = new System.Drawing.Size(248, 31);
 			this.setup_uninst.TabIndex = 11;
 			this.setup_uninst.Tag = "";
 			this.setup_uninst.Text = "Uninstall";
@@ -630,8 +662,29 @@ namespace bc
 			this.setup_uninst.MouseLeave += new System.EventHandler(this.StatusUpdateLeave);
 			this.setup_uninst.MouseMove += new System.Windows.Forms.MouseEventHandler(this.StatusUpdateMove);
 			// 
+			// setup_proc
+			// 
+			this.setup_proc.AccessibleDescription = "Installs runtime as background process";
+			this.setup_proc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
+			this.setup_proc.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+			this.setup_proc.FlatAppearance.BorderSize = 0;
+			this.setup_proc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.setup_proc.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+			this.setup_proc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+			this.setup_proc.Location = new System.Drawing.Point(12, 90);
+			this.setup_proc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.setup_proc.Name = "setup_proc";
+			this.setup_proc.Size = new System.Drawing.Size(248, 31);
+			this.setup_proc.TabIndex = 12;
+			this.setup_proc.Tag = "";
+			this.setup_proc.Text = "Install via bg process";
+			this.setup_proc.UseVisualStyleBackColor = false;
+			this.setup_proc.MouseLeave += new System.EventHandler(this.StatusUpdateLeave);
+			this.setup_proc.MouseMove += new System.Windows.Forms.MouseEventHandler(this.StatusUpdateMove);
+			// 
 			// setup_sch
 			// 
+			this.setup_sch.AccessibleDescription = "Schedules a runtime to change background";
 			this.setup_sch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(39)))), ((int)(((byte)(39)))), ((int)(((byte)(39)))));
 			this.setup_sch.FlatAppearance.BorderColor = System.Drawing.Color.Black;
 			this.setup_sch.FlatAppearance.BorderSize = 0;
@@ -641,7 +694,7 @@ namespace bc
 			this.setup_sch.Location = new System.Drawing.Point(12, 31);
 			this.setup_sch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.setup_sch.Name = "setup_sch";
-			this.setup_sch.Size = new System.Drawing.Size(248, 26);
+			this.setup_sch.Size = new System.Drawing.Size(248, 35);
 			this.setup_sch.TabIndex = 10;
 			this.setup_sch.Tag = "";
 			this.setup_sch.Text = "Install via Schedule";
@@ -707,11 +760,16 @@ namespace bc
 			this.time_ctx.ResumeLayout(false);
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
+			this.tabPage3.ResumeLayout(false);
 			this.tabPage4.ResumeLayout(false);
+			this.groupBox2.ResumeLayout(false);
 			this.groupBox1.ResumeLayout(false);
 			this.footer.ResumeLayout(false);
 			this.ResumeLayout(false);
 		}
+		private System.Windows.Forms.Panel panel2;
+		private System.Windows.Forms.ListBox listBox1;
+		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.Button setup_windir;
 		private System.Windows.Forms.ImageList chks;
 		private System.Windows.Forms.GroupBox groupBox2;

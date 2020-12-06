@@ -164,9 +164,10 @@ namespace bc
 			Dictionary<string, string> options = new Dictionary<string, string>();
 			void formSetup(){
 				try{
-					StreamReader sr = new StreamReader(Application.StartupPath + "\\theme.ini");
-					string[] lines = sr.ReadToEnd().Split('\n');
-					sr.Close();
+					//StreamReader sr = new StreamReader(Application.StartupPath + "\\theme.ini");
+					//string[] lines = sr.ReadToEnd().Split('\n');
+					string[] lines = "mainColour=44,77,77".Split('\n');
+					//sr.Close();
 					foreach (string l in lines) {
 						string[] o = l.Trim().Split('=');
 						options.Add(o[0],o[1]);
@@ -196,7 +197,7 @@ namespace bc
 			this.Opacity = 1;
 			status.Text="";
 			
-			// 
+			// Mode
 			foreach (string t in Settings.Default.times.Split(',')) {
 				times.Items.Add(t);
 			}
@@ -204,22 +205,21 @@ namespace bc
 			RadioButton mo = (RadioButton)(tabPage1.Controls[2-Settings.Default.mode]);
 			mo.Checked=true;
 			
+			// Theming
 			if (options.ContainsKey("mainColour")){
 				string[] cl = options["mainColour"].Split(',');
 				Color mainCol = Color.FromArgb(int.Parse(cl[0]),int.Parse(cl[1]),int.Parse(cl[2]));
 				Color mainColB = Color.FromArgb(int.Parse(cl[0])+3,int.Parse(cl[1])+3,int.Parse(cl[2])+3);
 				Color mainColD = Color.FromArgb(int.Parse(cl[0])-3,int.Parse(cl[1])-3,int.Parse(cl[2])-3);
-				Color mainColDD = Color.FromArgb(int.Parse(cl[0])-6,int.Parse(cl[1])-6,int.Parse(cl[2])-6);
-				
-				
 				tabs.SelectTabColor = mainCol;
-				
 				foreach (RadioButton t in tabPage1.Controls) {
 					t.FlatAppearance.CheckedBackColor = mainCol;
 					t.FlatAppearance.MouseOverBackColor = mainColB;
 					t.FlatAppearance.MouseDownBackColor = mainColD;
 				}
 			}
+			
+			// Status
 			Status_timerTick(new Object(),new EventArgs());
 			
 		}
@@ -229,8 +229,10 @@ namespace bc
 		void StatusUpdateMove(object sender, MouseEventArgs e)
 		{
 			Control b = (Control)sender;
-			status.ForeColor = Color.FromArgb(170,170,170);
-			status.Text = b.AccessibleDescription;
+			if (b.AccessibleDescription != null){
+				status.ForeColor = Color.FromArgb(170,170,170);
+				status.Text = b.AccessibleDescription;
+		    }
 		}
 		void StatusUpdateLeave(object sender, EventArgs e)
 		{
@@ -241,9 +243,9 @@ namespace bc
 		{
 			if (status.Text == ""){
 				if (currentStatus.ToLower()=="not running"){
-					status.ForeColor = Color.FromArgb(170,30,30);
+					status.ForeColor = Color.FromArgb(200,70,70);
 				} else if (currentStatus.ToLower()=="running"){
-					status.ForeColor = Color.FromArgb(30,170,30);
+					status.ForeColor = Color.FromArgb(70,200,70);
 				}
 				status.Text = "Status: " + currentStatus;
 			}
@@ -257,6 +259,8 @@ namespace bc
 			}
 			void TimesSelectedIndexChanged(object sender, EventArgs e)
 			{
+				if (times.SelectedItems.Count==0) return;
+				
 				string[] n = times.SelectedItem.ToString().Split('-');
 				string[] t = n[0].Split(':');
 				
