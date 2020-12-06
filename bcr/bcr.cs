@@ -13,7 +13,7 @@ using System.Threading;
 using System.Windows.Forms;
 using System.Linq;
 
-namespace toolkit
+namespace bc
 {
 	public sealed class bcr
 	{			

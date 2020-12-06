@@ -21,7 +21,8 @@ namespace bc
 	/// </summary>
 	public partial class MainForm : Form
 	{
-		#region Main Functions
+		#region Imported Functions
+			//Source: https://www.codeproject.com/articles/191424/resizing-an-image-on-the-fly-using-net#codeSampleTab-5
 			public static Image ResizeImage(Image image, Size size, bool preserveAspectRatio = true)
 			{
 			    int newWidth;
@@ -194,83 +195,100 @@ namespace bc
 		
 		#endregion
 		
-		#region Main Variables
-		public static MainForm Instance {get; private set;}
-string defaultConf = @"06:00-Morning-241:163:105,10:30-Day-250:217:150,18:00-Afternoon-208:105:2,20:00-Evening-52:52:158,22:00-Night-0:0:0
-%userprofile%\Pictures";
-	string[] config; 
-		#endregion
-
-		public MainForm()
-		{
-        	Instance = this;
-        	
-			InitializeComponent();
-			formSetup();
-			
-			this.Icon = Icon.ExtractAssociatedIcon(Process.GetCurrentProcess().MainModule.FileName);
-			titlebar_icon.Image = ResizeImage(this.Icon.ToBitmap(), new Size(16,16));
-		}
-		string confPath = "";
-		void MainFormLoad(object sender, EventArgs e)
-		{
-			this.Opacity = 1;
-			status.Text="";
-			
-			confPath = Application.StartupPath + "\\bc.conf";
-			
-			if (!File.Exists(confPath)){
-				StreamWriter sw = new StreamWriter(confPath);
-				sw.WriteLine(defaultConf);
-				sw.Close();
-			}
-			StreamReader sr = new StreamReader(confPath);
-			config = sr.ReadToEnd().Split('\n');
-			sr.Close();
-			
-			// Time Periods
-			foreach (string t in config[0].Trim().Split(',')) {
-				//string[] tp = t.Split('-');
-				//times.Items.Add(tp[0] + " - " + tp[1]);
-				times.Items.Add(t);
-			}
-			
-			// Image directory
-			imageDir.Text = config[1].Trim();
-			
-			// Status
-			Status_timerTick(new Object(),new EventArgs());
-			
-		}
+		#region Global
 		
-		#region Status
-		string currentStatus = "Not Running";
-		void StatusUpdateMove(object sender, MouseEventArgs e)
-		{
-			Control b = (Control)sender;
-			if (b.AccessibleDescription != null){
-				status.ForeColor = Color.FromArgb(170,170,170);
-				status.Text = b.AccessibleDescription;
-		    }
-		}
-		void StatusUpdateLeave(object sender, EventArgs e)
-		{
-			status.Text = "";
-			Status_timerTick(sender,e);
-		}
-		void Status_timerTick(object sender, EventArgs e)
-		{
-			if (status.Text == ""){
-				if (currentStatus.ToLower()=="not running"){
-					status.ForeColor = Color.FromArgb(200,70,70);
-				} else if (currentStatus.ToLower()=="running"){
-					status.ForeColor = Color.FromArgb(70,200,70);
-				}
-				status.Text = "Status: " + currentStatus;
+			#region Main Variables
+			public static MainForm Instance {get; private set;}
+	string defaultConf = @"06:00-Morning-241:163:105,10:30-Day-250:217:150,18:00-Afternoon-208:105:2,20:00-Evening-52:52:158,22:00-Night-0:0:0
+	%userprofile%\Pictures";
+		string[] config; 
+			#endregion
+	
+			#region Form Initialise
+			string confPath = "";
+			public MainForm()
+			{
+	        	Instance = this;
+	        	
+				InitializeComponent();
+				formSetup();
+				
+				this.Icon = Icon.ExtractAssociatedIcon(Process.GetCurrentProcess().MainModule.FileName);
+				titlebar_icon.Image = ResizeImage(this.Icon.ToBitmap(), new Size(16,16));
 			}
+			void MainFormLoad(object sender, EventArgs e)
+			{
+				this.Opacity = 1;
+				status.Text="";
+				
+				confPath = Application.StartupPath + "\\bc.conf";
+				
+				if (!File.Exists(confPath)){
+					StreamWriter sw = new StreamWriter(confPath);
+					sw.WriteLine(defaultConf);
+					sw.Close();
+				}
+				StreamReader sr = new StreamReader(confPath);
+				config = sr.ReadToEnd().Split('\n');
+				sr.Close();
+				
+				// Time Periods
+				foreach (string t in config[0].Trim().Split(',')) {
+					//string[] tp = t.Split('-');
+					//times.Items.Add(tp[0] + " - " + tp[1]);
+					times.Items.Add(t);
+				}
+				
+				// Image directory
+				imageDir.Text = config[1].Trim();
+				
+				// Status
+				Status_timerTick(new Object(),new EventArgs());
+				
+			}
+			#endregion
+			
+			#region Status
+			string currentStatus = "Not Running";
+			void StatusUpdateMove(object sender, MouseEventArgs e)
+			{
+				Control b = (Control)sender;
+				if (b.AccessibleDescription != null){
+					status.ForeColor = Color.FromArgb(170,170,170);
+					status.Text = b.AccessibleDescription;
+			    }
+			}
+			void StatusUpdateLeave(object sender, EventArgs e)
+			{
+				status.Text = "";
+				Status_timerTick(sender,e);
+			}
+			void Status_timerTick(object sender, EventArgs e)
+			{
+				if (status.Text == ""){
+					if (currentStatus.ToLower()=="not running"){
+						status.ForeColor = Color.FromArgb(200,70,70);
+					} else if (currentStatus.ToLower()=="running"){
+						status.ForeColor = Color.FromArgb(70,200,70);
+					}
+					status.Text = "Status: " + currentStatus;
+				}
+			}
+			#endregion
+			
+			void save(){
+			StreamWriter sw = new StreamWriter(confPath);
+			sw.Flush();
+			string exp = "";
+			foreach (string l in times.Items) {
+				exp += l + ",";
+			}
+			exp = exp.TrimEnd(',') + "\n" + imageDir.Text;
+			sw.WriteLine(exp);
+			sw.Close();
 		}
 		#endregion
-				
+		
 		#region Time Period Tab
 			void Time_ctxOpening(object sender, System.ComponentModel.CancelEventArgs e)
 			{
@@ -292,66 +310,68 @@ string defaultConf = @"06:00-Morning-241:163:105,10:30-Day-250:217:150,18:00-Aft
 				time_colour.BackColor = Color.FromArgb(int.Parse(c[0]),int.Parse(c[1]),int.Parse(c[2]));
 				time_colour.AccessibleDescription = n[2];
 			}
+			void Time_saveClick(object sender, EventArgs e)
+			{
+				this.Enabled = false;
+				if (times.SelectedItems.Count>0){
+					times.Items[times.SelectedIndex] = time_hr.Text + ":" + time_min.Text + "-" + time_name.Text + "-" + time_colour.AccessibleDescription;
+				} else {
+					
+				}
+				save();
+				this.Enabled = true;
+			}
+			void Time_colourClick(object sender, EventArgs e)
+			{
+				colourPick.Color = time_colour.BackColor;
+				if (colourPick.ShowDialog() == DialogResult.OK){
+					Color c = colourPick.Color;	
+					time_colour.BackColor = c;
+					time_colour.AccessibleDescription = c.R + ":" + c.G + ":" + c.B;
+				}
+			}
+			void Time_addClick(object sender, EventArgs e)
+			{
+				times.Items.Add("");
+				this.Enabled = false;
+				times.SelectedIndex = times.Items.Count-1;
+				this.Enabled = true;
+				time_hr.Text="";
+				time_min.Text="";
+				time_name.Text="";
+				time_colour.BackColor=Color.FromArgb(39, 39, 39);
+				time_hr.Focus();
+			}
 		#endregion
 		
-		
-		void Setup_windirClick(object sender, EventArgs e)
-		{
-			setup_windir.ImageIndex = (setup_windir.ImageIndex==0 ? 1 : 0);
-		}
-		
-		void TabsSelectedIndexChanged(object sender, EventArgs e)
-		{
-			
-		}
-		
-		void Setup_schClick(object sender, EventArgs e)
-		{
-			setup_sch.ImageIndex = (setup_sch.ImageIndex==0 ? 1 : 0);
-		}
-		
-		void Setup_procClick(object sender, EventArgs e)
+		#region Settings Tab
+			void Setup_windirClick(object sender, EventArgs e)
+			{
+				setup_windir.ImageIndex = (setup_windir.ImageIndex==0 ? 1 : 0);
+			}
+			void Setup_schClick(object sender, EventArgs e)
+			{
+				setup_sch.ImageIndex = (setup_sch.ImageIndex==0 ? 1 : 0);
+			}
+			void Setup_procClick(object sender, EventArgs e)
 		{
 			setup_proc.ImageIndex = (setup_proc.ImageIndex==0 ? 1 : 0);
 		}
-		
-		void Time_colourClick(object sender, EventArgs e)
-		{
-			colourPick.Color = time_colour.BackColor;
-			if (colourPick.ShowDialog() == DialogResult.OK){
-				Color c = colourPick.Color;	
-				time_colour.BackColor = c;
-				time_colour.AccessibleDescription = c.R + ":" + c.G + ":" + c.B;
-			}
-		}
-		
-		void Setup_uninstClick(object sender, EventArgs e)
-		{
-			
-		}
-		
-		void Time_saveClick(object sender, EventArgs e)
-		{
-			this.Enabled = false;
-			if (times.SelectedItems.Count>0){
-				times.Items[times.SelectedIndex] = time_hr.Text + ":" + time_min.Text + "-" + time_name.Text + "-" + time_colour.AccessibleDescription;
-			} else {
+			void Setup_uninstClick(object sender, EventArgs e)
+			{
 				
 			}
-			save();
-			this.Enabled = true;
-		}
-		
-		void save(){
-			StreamWriter sw = new StreamWriter(confPath);
-			sw.Flush();
-			string exp = "";
-			foreach (string l in times.Items) {
-				exp += l + ",";
+			void ImageDirSelectClick(object sender, EventArgs e)
+			{
+				if (folderPick.ShowDialog() == DialogResult.OK){
+					imageDir.Text = folderPick.SelectedPath;
+					save();
+				}			
 			}
-			exp = exp.TrimEnd(',') + "\n" + imageDir.Text;
-			sw.WriteLine(exp);
-			sw.Close();
-		}
+		#endregion
+		
+		#region Tools Tab
+		#endregion
+		
 	}
 }

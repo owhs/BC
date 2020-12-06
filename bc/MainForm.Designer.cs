@@ -75,8 +75,11 @@ namespace bc
 			this.time_hr = new System.Windows.Forms.TextBox();
 			this.label1 = new System.Windows.Forms.Label();
 			this.tabPage3 = new System.Windows.Forms.TabPage();
-			this.groupBox4 = new System.Windows.Forms.GroupBox();
+			this.groupBox3 = new System.Windows.Forms.GroupBox();
 			this.button3 = new System.Windows.Forms.Button();
+			this.label6 = new System.Windows.Forms.Label();
+			this.imageDirGroup = new System.Windows.Forms.GroupBox();
+			this.imageDirSelect = new System.Windows.Forms.Button();
 			this.imageDir = new System.Windows.Forms.Label();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.setup_uninst = new System.Windows.Forms.Button();
@@ -93,6 +96,7 @@ namespace bc
 			this.status = new System.Windows.Forms.Label();
 			this.status_timer = new System.Windows.Forms.Timer(this.components);
 			this.colourPick = new System.Windows.Forms.ColorDialog();
+			this.folderPick = new System.Windows.Forms.FolderBrowserDialog();
 			this.titlebar.SuspendLayout();
 			this.titlebar_ctx.SuspendLayout();
 			this.border.SuspendLayout();
@@ -102,7 +106,8 @@ namespace bc
 			this.time_ctx.SuspendLayout();
 			this.panel1.SuspendLayout();
 			this.tabPage3.SuspendLayout();
-			this.groupBox4.SuspendLayout();
+			this.groupBox3.SuspendLayout();
+			this.imageDirGroup.SuspendLayout();
 			this.groupBox1.SuspendLayout();
 			this.tabPage4.SuspendLayout();
 			this.groupBox2.SuspendLayout();
@@ -275,7 +280,6 @@ namespace bc
 			this.tabs.SizeMode = System.Windows.Forms.TabSizeMode.Fixed;
 			this.tabs.TabColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
 			this.tabs.TabIndex = 4;
-			this.tabs.SelectedIndexChanged += new System.EventHandler(this.TabsSelectedIndexChanged);
 			// 
 			// tabPage2
 			// 
@@ -307,6 +311,7 @@ namespace bc
 			this.time_add.Tag = "";
 			this.time_add.Text = "Add";
 			this.time_add.UseVisualStyleBackColor = false;
+			this.time_add.Click += new System.EventHandler(this.Time_addClick);
 			// 
 			// times
 			// 
@@ -374,7 +379,7 @@ namespace bc
 			this.time_colour.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.time_colour.Name = "time_colour";
 			this.time_colour.Size = new System.Drawing.Size(134, 26);
-			this.time_colour.TabIndex = 12;
+			this.time_colour.TabIndex = 8;
 			this.time_colour.Tag = "";
 			this.time_colour.UseVisualStyleBackColor = false;
 			this.time_colour.Click += new System.EventHandler(this.Time_colourClick);
@@ -457,6 +462,7 @@ namespace bc
 			this.time_min.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
 			this.time_min.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(155)))), ((int)(((byte)(155)))));
 			this.time_min.Location = new System.Drawing.Point(108, 59);
+			this.time_min.MaxLength = 2;
 			this.time_min.Multiline = true;
 			this.time_min.Name = "time_min";
 			this.time_min.Size = new System.Drawing.Size(48, 22);
@@ -470,6 +476,7 @@ namespace bc
 			this.time_hr.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
 			this.time_hr.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(155)))), ((int)(((byte)(155)))));
 			this.time_hr.Location = new System.Drawing.Point(22, 60);
+			this.time_hr.MaxLength = 2;
 			this.time_hr.Multiline = true;
 			this.time_hr.Name = "time_hr";
 			this.time_hr.Size = new System.Drawing.Size(48, 20);
@@ -489,7 +496,8 @@ namespace bc
 			// tabPage3
 			// 
 			this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
-			this.tabPage3.Controls.Add(this.groupBox4);
+			this.tabPage3.Controls.Add(this.groupBox3);
+			this.tabPage3.Controls.Add(this.imageDirGroup);
 			this.tabPage3.Controls.Add(this.groupBox1);
 			this.tabPage3.Location = new System.Drawing.Point(4, 32);
 			this.tabPage3.Name = "tabPage3";
@@ -497,19 +505,20 @@ namespace bc
 			this.tabPage3.TabIndex = 2;
 			this.tabPage3.Text = "Settings";
 			// 
-			// groupBox4
+			// groupBox3
 			// 
-			this.groupBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
-			this.groupBox4.Controls.Add(this.button3);
-			this.groupBox4.Controls.Add(this.imageDir);
-			this.groupBox4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.groupBox4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-			this.groupBox4.Location = new System.Drawing.Point(11, 14);
-			this.groupBox4.Name = "groupBox4";
-			this.groupBox4.Size = new System.Drawing.Size(357, 106);
-			this.groupBox4.TabIndex = 15;
-			this.groupBox4.TabStop = false;
-			this.groupBox4.Text = "Image Folder";
+			this.groupBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
+			this.groupBox3.Controls.Add(this.button3);
+			this.groupBox3.Controls.Add(this.label6);
+			this.groupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.groupBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+			this.groupBox3.Location = new System.Drawing.Point(11, 15);
+			this.groupBox3.Name = "groupBox3";
+			this.groupBox3.Padding = new System.Windows.Forms.Padding(0);
+			this.groupBox3.Size = new System.Drawing.Size(357, 61);
+			this.groupBox3.TabIndex = 16;
+			this.groupBox3.TabStop = false;
+			this.groupBox3.Text = "Image Folder";
 			// 
 			// button3
 			// 
@@ -520,7 +529,7 @@ namespace bc
 			this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
 			this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-			this.button3.Location = new System.Drawing.Point(281, 44);
+			this.button3.Location = new System.Drawing.Point(281, 21);
 			this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.button3.Name = "button3";
 			this.button3.Size = new System.Drawing.Size(57, 31);
@@ -529,19 +538,66 @@ namespace bc
 			this.button3.Text = "...";
 			this.button3.UseVisualStyleBackColor = false;
 			// 
+			// label6
+			// 
+			this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
+			this.label6.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+			this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+			this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+			this.label6.Location = new System.Drawing.Point(12, 21);
+			this.label6.Name = "label6";
+			this.label6.Padding = new System.Windows.Forms.Padding(2);
+			this.label6.Size = new System.Drawing.Size(263, 30);
+			this.label6.TabIndex = 9;
+			this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			// 
+			// imageDirGroup
+			// 
+			this.imageDirGroup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(44)))), ((int)(((byte)(44)))), ((int)(((byte)(44)))));
+			this.imageDirGroup.Controls.Add(this.imageDirSelect);
+			this.imageDirGroup.Controls.Add(this.imageDir);
+			this.imageDirGroup.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.imageDirGroup.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+			this.imageDirGroup.Location = new System.Drawing.Point(11, 92);
+			this.imageDirGroup.Name = "imageDirGroup";
+			this.imageDirGroup.Padding = new System.Windows.Forms.Padding(0);
+			this.imageDirGroup.Size = new System.Drawing.Size(357, 61);
+			this.imageDirGroup.TabIndex = 15;
+			this.imageDirGroup.TabStop = false;
+			this.imageDirGroup.Text = "Image Folder";
+			// 
+			// imageDirSelect
+			// 
+			this.imageDirSelect.AccessibleDescription = "Uninstall schedule / startup instances";
+			this.imageDirSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
+			this.imageDirSelect.FlatAppearance.BorderColor = System.Drawing.Color.Black;
+			this.imageDirSelect.FlatAppearance.BorderSize = 0;
+			this.imageDirSelect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+			this.imageDirSelect.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
+			this.imageDirSelect.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+			this.imageDirSelect.Location = new System.Drawing.Point(281, 21);
+			this.imageDirSelect.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.imageDirSelect.Name = "imageDirSelect";
+			this.imageDirSelect.Size = new System.Drawing.Size(57, 31);
+			this.imageDirSelect.TabIndex = 14;
+			this.imageDirSelect.Tag = "";
+			this.imageDirSelect.Text = "...";
+			this.imageDirSelect.UseVisualStyleBackColor = false;
+			this.imageDirSelect.Click += new System.EventHandler(this.ImageDirSelectClick);
+			// 
 			// imageDir
 			// 
 			this.imageDir.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(28)))), ((int)(((byte)(28)))), ((int)(((byte)(28)))));
 			this.imageDir.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
 			this.imageDir.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
 			this.imageDir.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-			this.imageDir.Location = new System.Drawing.Point(12, 44);
+			this.imageDir.Location = new System.Drawing.Point(12, 21);
 			this.imageDir.Name = "imageDir";
 			this.imageDir.Padding = new System.Windows.Forms.Padding(2);
 			this.imageDir.Size = new System.Drawing.Size(263, 30);
 			this.imageDir.TabIndex = 9;
-			this.imageDir.Text = "%userprofile%\\Pictures";
 			this.imageDir.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+			this.imageDir.Click += new System.EventHandler(this.ImageDirSelectClick);
 			// 
 			// groupBox1
 			// 
@@ -552,9 +608,9 @@ namespace bc
 			this.groupBox1.Controls.Add(this.setup_sch);
 			this.groupBox1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-			this.groupBox1.Location = new System.Drawing.Point(11, 137);
+			this.groupBox1.Location = new System.Drawing.Point(11, 169);
 			this.groupBox1.Name = "groupBox1";
-			this.groupBox1.Size = new System.Drawing.Size(357, 126);
+			this.groupBox1.Size = new System.Drawing.Size(357, 99);
 			this.groupBox1.TabIndex = 12;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Install";
@@ -568,7 +624,7 @@ namespace bc
 			this.setup_uninst.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
 			this.setup_uninst.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F);
 			this.setup_uninst.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
-			this.setup_uninst.Location = new System.Drawing.Point(179, 74);
+			this.setup_uninst.Location = new System.Drawing.Point(179, 57);
 			this.setup_uninst.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.setup_uninst.Name = "setup_uninst";
 			this.setup_uninst.Size = new System.Drawing.Size(164, 31);
@@ -592,7 +648,7 @@ namespace bc
 			this.setup_windir.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.setup_windir.ImageIndex = 0;
 			this.setup_windir.ImageList = this.chks;
-			this.setup_windir.Location = new System.Drawing.Point(9, 74);
+			this.setup_windir.Location = new System.Drawing.Point(9, 57);
 			this.setup_windir.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.setup_windir.Name = "setup_windir";
 			this.setup_windir.Size = new System.Drawing.Size(164, 31);
@@ -624,7 +680,7 @@ namespace bc
 			this.setup_proc.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.setup_proc.ImageIndex = 0;
 			this.setup_proc.ImageList = this.chks;
-			this.setup_proc.Location = new System.Drawing.Point(179, 31);
+			this.setup_proc.Location = new System.Drawing.Point(179, 20);
 			this.setup_proc.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.setup_proc.Name = "setup_proc";
 			this.setup_proc.Size = new System.Drawing.Size(164, 31);
@@ -649,7 +705,7 @@ namespace bc
 			this.setup_sch.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
 			this.setup_sch.ImageIndex = 0;
 			this.setup_sch.ImageList = this.chks;
-			this.setup_sch.Location = new System.Drawing.Point(9, 27);
+			this.setup_sch.Location = new System.Drawing.Point(9, 18);
 			this.setup_sch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.setup_sch.Name = "setup_sch";
 			this.setup_sch.Size = new System.Drawing.Size(164, 35);
@@ -803,19 +859,24 @@ namespace bc
 			this.panel1.ResumeLayout(false);
 			this.panel1.PerformLayout();
 			this.tabPage3.ResumeLayout(false);
-			this.groupBox4.ResumeLayout(false);
+			this.groupBox3.ResumeLayout(false);
+			this.imageDirGroup.ResumeLayout(false);
 			this.groupBox1.ResumeLayout(false);
 			this.tabPage4.ResumeLayout(false);
 			this.groupBox2.ResumeLayout(false);
 			this.footer.ResumeLayout(false);
 			this.ResumeLayout(false);
 		}
+		private System.Windows.Forms.Label label6;
+		private System.Windows.Forms.Button button3;
+		private System.Windows.Forms.GroupBox groupBox3;
+		private System.Windows.Forms.FolderBrowserDialog folderPick;
 		private System.Windows.Forms.ColorDialog colourPick;
 		private System.Windows.Forms.Button time_colour;
-		private System.Windows.Forms.Button button3;
+		private System.Windows.Forms.Button imageDirSelect;
 		private System.Windows.Forms.Label imageDir;
 		private System.Windows.Forms.Label label5;
-		private System.Windows.Forms.GroupBox groupBox4;
+		private System.Windows.Forms.GroupBox imageDirGroup;
 		private System.Windows.Forms.Button time_add;
 		private System.Windows.Forms.Button button4;
 		private System.Windows.Forms.Button button2;
