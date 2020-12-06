@@ -316,7 +316,7 @@ string defaultConf = @"06:00-Morning-241:163:105,10:30-Day-250:217:150,18:00-Aft
 		{
 			colourPick.Color = time_colour.BackColor;
 			if (colourPick.ShowDialog() == DialogResult.OK){
-				Color c = colourPick.Color;
+				Color c = colourPick.Color;	
 				time_colour.BackColor = c;
 				time_colour.AccessibleDescription = c.R + ":" + c.G + ":" + c.B;
 			}
