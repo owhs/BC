@@ -31,8 +31,11 @@ namespace toolkit
 		{
 			string[] arguments = Environment.GetCommandLineArgs().Skip(1).ToArray();
 			
-			if (arguments.Length>0) MessageBox.Show(arguments[0].Replace("-",""));
-       		
+			//if (arguments.Length>0) MessageBox.Show(arguments[0].Replace("-",""));
+			
+       		foreach (string a in arguments) {
+				MessageBox.Show(a.Trim('-'));
+       		}
        		Environment.Exit(1);
 		}
 	}

@@ -7,11 +7,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle ("toolkit")]
+[assembly: AssemblyTitle ("Background Commander Runtime: background process / schedule trigger")]
 [assembly: AssemblyDescription ("")]
 [assembly: AssemblyConfiguration ("")]
 [assembly: AssemblyCompany ("")]
-[assembly: AssemblyProduct ("toolkit")]
+[assembly: AssemblyProduct ("Background Commander")]
 [assembly: AssemblyCopyright ("Copyright 2020")]
 [assembly: AssemblyTrademark ("")]
 [assembly: AssemblyCulture ("")]

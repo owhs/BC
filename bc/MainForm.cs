@@ -235,6 +235,9 @@ string defaultConf = @"06:00-Morning-241:163:105,10:30-Day-250:217:150,18:00-Aft
 				times.Items.Add(t);
 			}
 			
+			// Image directory
+			imageDir.Text = config[1].Trim();
+			
 			// Status
 			Status_timerTick(new Object(),new EventArgs());
 			
@@ -327,7 +330,6 @@ string defaultConf = @"06:00-Morning-241:163:105,10:30-Day-250:217:150,18:00-Aft
 			
 		}
 		
-		
 		void Time_saveClick(object sender, EventArgs e)
 		{
 			this.Enabled = false;
@@ -336,19 +338,20 @@ string defaultConf = @"06:00-Morning-241:163:105,10:30-Day-250:217:150,18:00-Aft
 			} else {
 				
 			}
+			save();
+			this.Enabled = true;
+		}
+		
+		void save(){
 			StreamWriter sw = new StreamWriter(confPath);
 			sw.Flush();
-			
 			string exp = "";
-			
 			foreach (string l in times.Items) {
 				exp += l + ",";
 			}
 			exp = exp.TrimEnd(',') + "\n" + imageDir.Text;
 			sw.WriteLine(exp);
 			sw.Close();
-			
-			this.Enabled = true;
 		}
 	}
 }
