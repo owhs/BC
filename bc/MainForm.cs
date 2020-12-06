@@ -133,11 +133,11 @@ namespace bc
 			#region Form Focus etc
 			void MainFormDeactivate(object sender, EventArgs e)
 			{
-				this.Enabled = false;
+				//this.Enabled = false;
 			}
 			void MainFormActivated(object sender, EventArgs e)
 			{
-				this.Enabled = true;
+				//this.Enabled = true;
 			}
 			#endregion
 			
@@ -174,13 +174,33 @@ namespace bc
 					}
 				} catch {}
 				if (options.Count>0) LoopThroughControls(this);
+				
+				
+			// Theming
+			if (options.ContainsKey("mainColour")){
+				string[] cl = options["mainColour"].Split(',');
+				Color mainCol = Color.FromArgb(int.Parse(cl[0]),int.Parse(cl[1]),int.Parse(cl[2]));
+				Color mainColB = Color.FromArgb(int.Parse(cl[0])+3,int.Parse(cl[1])+3,int.Parse(cl[2])+3);
+				Color mainColD = Color.FromArgb(int.Parse(cl[0])-3,int.Parse(cl[1])-3,int.Parse(cl[2])-3);
+				tabs.SelectTabColor = mainCol;
+				/*foreach (RadioButton t in tabPage1.Controls) {
+					t.FlatAppearance.CheckedBackColor = mainCol;
+					t.FlatAppearance.MouseOverBackColor = mainColB;
+					t.FlatAppearance.MouseDownBackColor = mainColD;
+				}*/
+			}
 			}
 			#endregion
 		
 		#endregion
 		
+		#region Main Variables
 		public static MainForm Instance {get; private set;}
-		
+string defaultConf = @"06:00-Morning-241:163:105,10:30-Day-250:217:150,18:00-Afternoon-208:105:2,20:00-Evening-52:52:158,22:00-Night-0:0:0
+%userprofile%\Pictures";
+	string[] config; 
+		#endregion
+
 		public MainForm()
 		{
         	Instance = this;
@@ -191,32 +211,28 @@ namespace bc
 			this.Icon = Icon.ExtractAssociatedIcon(Process.GetCurrentProcess().MainModule.FileName);
 			titlebar_icon.Image = ResizeImage(this.Icon.ToBitmap(), new Size(16,16));
 		}
-		
+		string confPath = "";
 		void MainFormLoad(object sender, EventArgs e)
 		{
 			this.Opacity = 1;
 			status.Text="";
 			
-			// Mode
-			foreach (string t in Settings.Default.times.Split(',')) {
-				times.Items.Add(t);
+			confPath = Application.StartupPath + "\\bc.conf";
+			
+			if (!File.Exists(confPath)){
+				StreamWriter sw = new StreamWriter(confPath);
+				sw.WriteLine(defaultConf);
+				sw.Close();
 			}
+			StreamReader sr = new StreamReader(confPath);
+			config = sr.ReadToEnd().Split('\n');
+			sr.Close();
 			
-			RadioButton mo = (RadioButton)(tabPage1.Controls[2-Settings.Default.mode]);
-			mo.Checked=true;
-			
-			// Theming
-			if (options.ContainsKey("mainColour")){
-				string[] cl = options["mainColour"].Split(',');
-				Color mainCol = Color.FromArgb(int.Parse(cl[0]),int.Parse(cl[1]),int.Parse(cl[2]));
-				Color mainColB = Color.FromArgb(int.Parse(cl[0])+3,int.Parse(cl[1])+3,int.Parse(cl[2])+3);
-				Color mainColD = Color.FromArgb(int.Parse(cl[0])-3,int.Parse(cl[1])-3,int.Parse(cl[2])-3);
-				tabs.SelectTabColor = mainCol;
-				foreach (RadioButton t in tabPage1.Controls) {
-					t.FlatAppearance.CheckedBackColor = mainCol;
-					t.FlatAppearance.MouseOverBackColor = mainColB;
-					t.FlatAppearance.MouseDownBackColor = mainColD;
-				}
+			// Time Periods
+			foreach (string t in config[0].Trim().Split(',')) {
+				//string[] tp = t.Split('-');
+				//times.Items.Add(tp[0] + " - " + tp[1]);
+				times.Items.Add(t);
 			}
 			
 			// Status
@@ -259,15 +275,19 @@ namespace bc
 			}
 			void TimesSelectedIndexChanged(object sender, EventArgs e)
 			{
-				if (times.SelectedItems.Count==0) return;
+				if (times.SelectedItems.Count==0 || this.Enabled==false) return;
 				
 				string[] n = times.SelectedItem.ToString().Split('-');
 				string[] t = n[0].Split(':');
 				
 				time_hr.Text = t[0];
 				time_min.Text = t[1];
+				
 				time_name.Text = n[1];
 				
+				string[] c = n[2].Split(':');
+				time_colour.BackColor = Color.FromArgb(int.Parse(c[0]),int.Parse(c[1]),int.Parse(c[2]));
+				time_colour.AccessibleDescription = n[2];
 			}
 		#endregion
 		
@@ -275,6 +295,60 @@ namespace bc
 		void Setup_windirClick(object sender, EventArgs e)
 		{
 			setup_windir.ImageIndex = (setup_windir.ImageIndex==0 ? 1 : 0);
+		}
+		
+		void TabsSelectedIndexChanged(object sender, EventArgs e)
+		{
+			
+		}
+		
+		void Setup_schClick(object sender, EventArgs e)
+		{
+			setup_sch.ImageIndex = (setup_sch.ImageIndex==0 ? 1 : 0);
+		}
+		
+		void Setup_procClick(object sender, EventArgs e)
+		{
+			setup_proc.ImageIndex = (setup_proc.ImageIndex==0 ? 1 : 0);
+		}
+		
+		void Time_colourClick(object sender, EventArgs e)
+		{
+			colourPick.Color = time_colour.BackColor;
+			if (colourPick.ShowDialog() == DialogResult.OK){
+				Color c = colourPick.Color;
+				time_colour.BackColor = c;
+				time_colour.AccessibleDescription = c.R + ":" + c.G + ":" + c.B;
+			}
+		}
+		
+		void Setup_uninstClick(object sender, EventArgs e)
+		{
+			
+		}
+		
+		
+		void Time_saveClick(object sender, EventArgs e)
+		{
+			this.Enabled = false;
+			if (times.SelectedItems.Count>0){
+				times.Items[times.SelectedIndex] = time_hr.Text + ":" + time_min.Text + "-" + time_name.Text + "-" + time_colour.AccessibleDescription;
+			} else {
+				
+			}
+			StreamWriter sw = new StreamWriter(confPath);
+			sw.Flush();
+			
+			string exp = "";
+			
+			foreach (string l in times.Items) {
+				exp += l + ",";
+			}
+			exp = exp.TrimEnd(',') + "\n" + imageDir.Text;
+			sw.WriteLine(exp);
+			sw.Close();
+			
+			this.Enabled = true;
 		}
 	}
 }
