@@ -57,7 +57,6 @@ namespace bc
 			// imageDirSelect
 			// 
 			this.imageDirSelect.AccessibleDescription = "Select new path";
-			this.imageDirSelect.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
 			this.imageDirSelect.Dock = System.Windows.Forms.DockStyle.Top;
 			this.imageDirSelect.FlatAppearance.BorderColor = System.Drawing.Color.Black;
 			this.imageDirSelect.FlatAppearance.BorderSize = 0;
@@ -67,7 +66,7 @@ namespace bc
 			this.imageDirSelect.Location = new System.Drawing.Point(0, 0);
 			this.imageDirSelect.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.imageDirSelect.Name = "imageDirSelect";
-			this.imageDirSelect.Size = new System.Drawing.Size(173, 39);
+			this.imageDirSelect.Size = new System.Drawing.Size(162, 39);
 			this.imageDirSelect.TabIndex = 19;
 			this.imageDirSelect.Tag = "";
 			this.imageDirSelect.Text = "minute";
@@ -77,7 +76,6 @@ namespace bc
 			// button1
 			// 
 			this.button1.AccessibleDescription = "Select new path";
-			this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
 			this.button1.Dock = System.Windows.Forms.DockStyle.Top;
 			this.button1.FlatAppearance.BorderColor = System.Drawing.Color.Black;
 			this.button1.FlatAppearance.BorderSize = 0;
@@ -87,7 +85,7 @@ namespace bc
 			this.button1.Location = new System.Drawing.Point(0, 39);
 			this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.button1.Name = "button1";
-			this.button1.Size = new System.Drawing.Size(173, 39);
+			this.button1.Size = new System.Drawing.Size(162, 39);
 			this.button1.TabIndex = 20;
 			this.button1.Tag = "";
 			this.button1.Text = "2 minutes";
@@ -97,7 +95,6 @@ namespace bc
 			// button2
 			// 
 			this.button2.AccessibleDescription = "Select new path";
-			this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
 			this.button2.Dock = System.Windows.Forms.DockStyle.Top;
 			this.button2.FlatAppearance.BorderColor = System.Drawing.Color.Black;
 			this.button2.FlatAppearance.BorderSize = 0;
@@ -107,7 +104,7 @@ namespace bc
 			this.button2.Location = new System.Drawing.Point(0, 78);
 			this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.button2.Name = "button2";
-			this.button2.Size = new System.Drawing.Size(173, 39);
+			this.button2.Size = new System.Drawing.Size(162, 39);
 			this.button2.TabIndex = 21;
 			this.button2.Tag = "";
 			this.button2.Text = "5 minutes";
@@ -117,7 +114,6 @@ namespace bc
 			// button3
 			// 
 			this.button3.AccessibleDescription = "Select new path";
-			this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
 			this.button3.Dock = System.Windows.Forms.DockStyle.Top;
 			this.button3.FlatAppearance.BorderColor = System.Drawing.Color.Black;
 			this.button3.FlatAppearance.BorderSize = 0;
@@ -127,7 +123,7 @@ namespace bc
 			this.button3.Location = new System.Drawing.Point(0, 117);
 			this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.button3.Name = "button3";
-			this.button3.Size = new System.Drawing.Size(173, 39);
+			this.button3.Size = new System.Drawing.Size(162, 39);
 			this.button3.TabIndex = 22;
 			this.button3.Tag = "";
 			this.button3.Text = "10 minutes";
@@ -137,7 +133,6 @@ namespace bc
 			// button4
 			// 
 			this.button4.AccessibleDescription = "Select new path";
-			this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
 			this.button4.Dock = System.Windows.Forms.DockStyle.Top;
 			this.button4.FlatAppearance.BorderColor = System.Drawing.Color.Black;
 			this.button4.FlatAppearance.BorderSize = 0;
@@ -147,7 +142,7 @@ namespace bc
 			this.button4.Location = new System.Drawing.Point(0, 156);
 			this.button4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.button4.Name = "button4";
-			this.button4.Size = new System.Drawing.Size(173, 39);
+			this.button4.Size = new System.Drawing.Size(162, 39);
 			this.button4.TabIndex = 23;
 			this.button4.Tag = "";
 			this.button4.Text = "15 minutes";
@@ -157,7 +152,6 @@ namespace bc
 			// button5
 			// 
 			this.button5.AccessibleDescription = "Select new path";
-			this.button5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
 			this.button5.Dock = System.Windows.Forms.DockStyle.Top;
 			this.button5.FlatAppearance.BorderColor = System.Drawing.Color.Black;
 			this.button5.FlatAppearance.BorderSize = 0;
@@ -167,7 +161,7 @@ namespace bc
 			this.button5.Location = new System.Drawing.Point(0, 195);
 			this.button5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.button5.Name = "button5";
-			this.button5.Size = new System.Drawing.Size(173, 39);
+			this.button5.Size = new System.Drawing.Size(162, 39);
 			this.button5.TabIndex = 24;
 			this.button5.Tag = "";
 			this.button5.Text = "30 minutes";
@@ -177,7 +171,6 @@ namespace bc
 			// button6
 			// 
 			this.button6.AccessibleDescription = "Select new path";
-			this.button6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
 			this.button6.Dock = System.Windows.Forms.DockStyle.Top;
 			this.button6.FlatAppearance.BorderColor = System.Drawing.Color.Black;
 			this.button6.FlatAppearance.BorderSize = 0;
@@ -187,7 +180,7 @@ namespace bc
 			this.button6.Location = new System.Drawing.Point(0, 234);
 			this.button6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.button6.Name = "button6";
-			this.button6.Size = new System.Drawing.Size(173, 39);
+			this.button6.Size = new System.Drawing.Size(162, 39);
 			this.button6.TabIndex = 25;
 			this.button6.Tag = "";
 			this.button6.Text = "hour";
@@ -197,7 +190,6 @@ namespace bc
 			// button7
 			// 
 			this.button7.AccessibleDescription = "Select new path";
-			this.button7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(35)))), ((int)(((byte)(35)))), ((int)(((byte)(35)))));
 			this.button7.Dock = System.Windows.Forms.DockStyle.Top;
 			this.button7.FlatAppearance.BorderColor = System.Drawing.Color.Black;
 			this.button7.FlatAppearance.BorderSize = 0;
@@ -207,10 +199,10 @@ namespace bc
 			this.button7.Location = new System.Drawing.Point(0, 273);
 			this.button7.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.button7.Name = "button7";
-			this.button7.Size = new System.Drawing.Size(173, 39);
+			this.button7.Size = new System.Drawing.Size(162, 39);
 			this.button7.TabIndex = 26;
 			this.button7.Tag = "";
-			this.button7.Text = "once";
+			this.button7.Text = "peroid change";
 			this.button7.UseVisualStyleBackColor = false;
 			this.button7.Click += new System.EventHandler(this.ImageDirSelectClick);
 			// 
@@ -218,8 +210,9 @@ namespace bc
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(33)))), ((int)(((byte)(33)))), ((int)(((byte)(33)))));
-			this.ClientSize = new System.Drawing.Size(173, 310);
+			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(66)))), ((int)(((byte)(66)))));
+			this.ClientSize = new System.Drawing.Size(162, 310);
 			this.Controls.Add(this.button7);
 			this.Controls.Add(this.button6);
 			this.Controls.Add(this.button5);

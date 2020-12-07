@@ -374,8 +374,9 @@ namespace bc
 				timeSelector ts = new timeSelector();
 				Point p = PointToScreen(timeReload.Location);
 				ts.Location = p;
+				ts.Top += ts.Height/4;
 				foreach (Button b in ts.Controls) {
-					if (timeReload.Text == b.Text) b.BackColor = Color.FromArgb(55,55,55);
+					if (timeReload.Text == b.Text) b.BackColor = Color.FromArgb(44,77,77);
 				}
 				ts.Show();
 			}

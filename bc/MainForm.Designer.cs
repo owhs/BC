@@ -285,7 +285,7 @@ namespace bc
 			// 
 			// tabPage2
 			// 
-			this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+			this.tabPage2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
 			this.tabPage2.Controls.Add(this.time_add);
 			this.tabPage2.Controls.Add(this.times);
 			this.tabPage2.Controls.Add(this.panel1);
@@ -503,7 +503,7 @@ namespace bc
 			// 
 			// tabPage3
 			// 
-			this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+			this.tabPage3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
 			this.tabPage3.Controls.Add(this.groupBox5);
 			this.tabPage3.Controls.Add(this.groupBox2);
 			this.tabPage3.Controls.Add(this.groupBox4);
@@ -517,11 +517,10 @@ namespace bc
 			// 
 			// groupBox5
 			// 
-			this.groupBox5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
 			this.groupBox5.Controls.Add(this.imageDirSelect);
 			this.groupBox5.Controls.Add(this.imageDir);
 			this.groupBox5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.groupBox5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+			this.groupBox5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
 			this.groupBox5.Location = new System.Drawing.Point(12, 92);
 			this.groupBox5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.groupBox5.Name = "groupBox5";
@@ -548,6 +547,7 @@ namespace bc
 			this.imageDirSelect.Tag = "";
 			this.imageDirSelect.Text = "...";
 			this.imageDirSelect.UseVisualStyleBackColor = false;
+			this.imageDirSelect.Click += new System.EventHandler(this.ImageDirSelectClick);
 			this.imageDirSelect.MouseLeave += new System.EventHandler(this.StatusUpdateLeave);
 			this.imageDirSelect.MouseMove += new System.Windows.Forms.MouseEventHandler(this.StatusUpdateMove);
 			// 
@@ -566,10 +566,9 @@ namespace bc
 			// 
 			// groupBox2
 			// 
-			this.groupBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
 			this.groupBox2.Controls.Add(this.tagImages);
 			this.groupBox2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+			this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
 			this.groupBox2.Location = new System.Drawing.Point(12, 177);
 			this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.groupBox2.Name = "groupBox2";
@@ -613,10 +612,9 @@ namespace bc
 			// 
 			// groupBox4
 			// 
-			this.groupBox4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
 			this.groupBox4.Controls.Add(this.button4);
 			this.groupBox4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.groupBox4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+			this.groupBox4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
 			this.groupBox4.Location = new System.Drawing.Point(12, 262);
 			this.groupBox4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.groupBox4.Name = "groupBox4";
@@ -646,11 +644,10 @@ namespace bc
 			// 
 			// groupBox3
 			// 
-			this.groupBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
 			this.groupBox3.Controls.Add(this.timeReload);
 			this.groupBox3.Controls.Add(this.label6);
 			this.groupBox3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-			this.groupBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(170)))), ((int)(((byte)(170)))), ((int)(((byte)(170)))));
+			this.groupBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
 			this.groupBox3.Location = new System.Drawing.Point(12, 7);
 			this.groupBox3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
 			this.groupBox3.Name = "groupBox3";
@@ -680,7 +677,7 @@ namespace bc
 			// 
 			// label6
 			// 
-			this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(190)))), ((int)(((byte)(190)))), ((int)(((byte)(190)))));
+			this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(200)))), ((int)(((byte)(200)))));
 			this.label6.Location = new System.Drawing.Point(16, 29);
 			this.label6.Name = "label6";
 			this.label6.Size = new System.Drawing.Size(205, 35);
@@ -690,7 +687,7 @@ namespace bc
 			// 
 			// tabPage4
 			// 
-			this.tabPage4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
+			this.tabPage4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(55)))), ((int)(((byte)(55)))), ((int)(((byte)(55)))));
 			this.tabPage4.Controls.Add(this.groupBox1);
 			this.tabPage4.Location = new System.Drawing.Point(4, 32);
 			this.tabPage4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -701,7 +698,6 @@ namespace bc
 			// 
 			// groupBox1
 			// 
-			this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(60)))), ((int)(((byte)(60)))), ((int)(((byte)(60)))));
 			this.groupBox1.Controls.Add(this.setup_uninst);
 			this.groupBox1.Controls.Add(this.setup_windir);
 			this.groupBox1.Controls.Add(this.setup_proc);
