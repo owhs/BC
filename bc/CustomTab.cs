@@ -78,7 +78,7 @@ namespace bc
                 Pen border = new Pen(Color.Transparent);
                 g.DrawRectangle(border, clientRectangle);
 
-                Brush solidBrush = new SolidBrush(Color.FromArgb(55, 55, 55));
+                Brush solidBrush = new SolidBrush(Color.FromArgb(60,60,60));
                 //Brush solidBrush = new SolidBrush(Color.FromArgb(30, 70, 130)
                 g.FillRectangle(solidBrush, ClientRectangle);
 
@@ -100,7 +100,7 @@ namespace bc
                 for (int i = 0; i < TabCount; i++)
                 {
                     DrawTab(g, TabPages[i], i);
-                    TabPages[i].BackColor = Color.FromArgb(44,44,44);
+                    TabPages[i].BackColor = Color.FromArgb(60,60,60);
                 }
 
                 g.Clip = region;

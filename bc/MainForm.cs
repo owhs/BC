@@ -355,6 +355,34 @@ namespace bc
 		
 		#region Settings Tab
 			
+			
+			void ImageDirSelectClick(object sender, EventArgs e)
+			{
+				if (folderPick.ShowDialog() == DialogResult.OK){
+					imageDir.Text = folderPick.SelectedPath;
+					save();
+				}			
+			}
+			
+			void TagImagesClick(object sender, EventArgs e)
+			{
+				tagImages.ImageIndex = (tagImages.ImageIndex==0 ? 1 : 0);
+				
+			}
+			void TimeReloadClick(object sender, EventArgs e)
+			{
+				timeSelector ts = new timeSelector();
+				Point p = PointToScreen(timeReload.Location);
+				ts.Location = p;
+				foreach (Button b in ts.Controls) {
+					if (timeReload.Text == b.Text) b.BackColor = Color.FromArgb(55,55,55);
+				}
+				ts.Show();
+			}
+		
+		#endregion
+		
+		#region Setup Tab
 			void Setup_windirClick(object sender, EventArgs e)
 			{
 				setup_windir.ImageIndex = (setup_windir.ImageIndex==0 ? 1 : 0);
@@ -366,26 +394,14 @@ namespace bc
 			}
 			
 			void Setup_procClick(object sender, EventArgs e)
-		{
-			setup_proc.ImageIndex = (setup_proc.ImageIndex==0 ? 1 : 0);
-		}
+			{
+				setup_proc.ImageIndex = (setup_proc.ImageIndex==0 ? 1 : 0);
+			}
 			
 			void Setup_uninstClick(object sender, EventArgs e)
 			{
 				
 			}
-			
-			void ImageDirSelectClick(object sender, EventArgs e)
-			{
-				if (folderPick.ShowDialog() == DialogResult.OK){
-					imageDir.Text = folderPick.SelectedPath;
-					save();
-				}			
-			}
-		
-		#endregion
-		
-		#region Tools Tab
 		#endregion
 		
 	}
